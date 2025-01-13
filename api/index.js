@@ -1,8 +1,11 @@
 import express from "express";
 import mongoose from "mongoose";
+import dotenv from 'dotenv';
+
+dotenv.config(); 
 
 mongoose.connect(
-  "mongodb+srv://parmindersokhal22:BlogSite22@blog-site.zhnju.mongodb.net/blog-site?retryWrites=true&w=majority&appName=blog-site"
+  process.env.MONGO
 ).then(()=>{
     console.log('mongodb is connected')
 }).catch(err=>{
