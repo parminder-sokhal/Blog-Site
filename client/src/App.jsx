@@ -2,11 +2,12 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Signup from "./pages/Signup";
+import Signup from "./pages/SignUp";
 import Signin from "./pages/Signin";
 import Dashboard from "./pages/Dashboard";
 import Projects from "./pages/projects";
 import Header from "./Components/Header";
+import Footer  from "./Components/Footer";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/Projects" element={<Projects />} />
       </Routes>
+      <Footer/>
     </BrowserRouter>
   );
 }
