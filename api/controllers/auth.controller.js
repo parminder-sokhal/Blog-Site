@@ -40,7 +40,6 @@ export const signin = async (req, res, next) => {
   }
 
   try {
-
     const validUser = await User.findOne({ email });
     if (!validUser) {
       next(errorHandler(400, "user not found"));
@@ -48,7 +47,7 @@ export const signin = async (req, res, next) => {
 
     const validPassword = bcryptjs.compareSync(password, validUser.password);
     if (!validPassword) {
-      return next(errorHandler(400, "invalid password")); 
+      return next(errorHandler(400, "invalid password"));
     }
 
     const token = jwt.sign(
@@ -58,7 +57,7 @@ export const signin = async (req, res, next) => {
       process.env.JWT_SECRET
     );
 
-    const {password: pass, ...rest}=validUser._doc;
+    const { password: pass, ...rest } = validUser._doc;
 
     res
       .status(200)
@@ -71,9 +70,8 @@ export const signin = async (req, res, next) => {
   }
 };
 
-
-export const google = async (req,res,next)=>{
-  const{email,name, googlePhotoUrl}=req.body;
+export const google = async (req, res, next) => {
+  const { email, name, googlePhotoUrl } = req.body;
   try {
     const user = await User.findOne({ email });
     if (user) {
@@ -84,7 +82,7 @@ export const google = async (req,res,next)=>{
       const { password, ...rest } = user._doc;
       res
         .status(200)
-        .cookie('access_token', token, {
+        .cookie("access_token", token, {
           httpOnly: true,
         })
         .json(rest);
@@ -95,7 +93,7 @@ export const google = async (req,res,next)=>{
       const hashedPassword = bcryptjs.hashSync(generatedPassword, 10);
       const newUser = new User({
         username:
-          name.toLowerCase().split(' ').join('') +
+          name.toLowerCase().split(" ").join("") +
           Math.random().toString(9).slice(-4),
         email,
         password: hashedPassword,
@@ -109,7 +107,7 @@ export const google = async (req,res,next)=>{
       const { password, ...rest } = newUser._doc;
       res
         .status(200)
-        .cookie('access_token', token, {
+        .cookie("access_token", token, {
           httpOnly: true,
         })
         .json(rest);
@@ -117,4 +115,4 @@ export const google = async (req,res,next)=>{
   } catch (error) {
     next(error);
   }
-}
+};

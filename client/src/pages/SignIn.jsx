@@ -11,7 +11,7 @@ import OAuth from "../Components/OAuth";
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
-  const { loading, error: errorMessage } = useSelector(state=> state.user);
+  const { loading, error: errorMessage } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -90,7 +90,7 @@ export default function SignIn() {
                 "Sign In"
               )}
             </Button>
-            <OAuth/>
+            <OAuth />
           </form>
           <div className="flex gap-2 text-sm mt-5">
             <span>Dont Have an account?</span>
@@ -106,5 +106,5 @@ export default function SignIn() {
         </div>
       </div>
     </div>
-  );
+  ); 
 }
